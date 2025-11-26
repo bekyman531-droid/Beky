@@ -26,7 +26,44 @@
     <link rel="dns-prefetch" href="https://t.me">
     <script src="https://cdn.tailwindcss.com" defer></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>:root{--color-primary:#0f172a;--color-secondary:#1e3a5f;--color-accent:#00d4ff;font-size:clamp(15px,1.5vw,18px);}html{scroll-behavior:smooth;}*{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}@keyframes float{0%,100%{transform:translateY(0) translateX(0) rotate(0);opacity:.7}50%{transform:translateY(-20px) translateX(10px) rotate(180deg);opacity:.4}}@keyframes float-delayed-1{0%,100%{transform:translateY(0) translateX(0) rotate(0);opacity:.5}50%{transform:translateY(-30px) translateX(-15px) rotate(180deg);opacity:.3}}@keyframes float-delayed-2{0%,100%{transform:translateY(0) translateX(0) rotate(0);opacity:.6}50%{transform:translateY(-25px) translateX(20px) rotate(180deg);opacity:.35}}.floating-coin{animation:float 6s ease-in-out infinite;will-change:transform;}.floating-coin:nth-child(2){animation:float-delayed-1 8s ease-in-out infinite;animation-delay:1s;}.floating-coin:nth-child(3){animation:float-delayed-2 7s ease-in-out infinite;animation-delay:2s;}.floating-coin:nth-child(4){animation:float 6s ease-in-out infinite;animation-delay:.5s;}.floating-coin:nth-child(5){animation:float-delayed-1 8s ease-in-out infinite;animation-delay:1.5s;}.hero-gradient{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f2847 100%);}.glass{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);will-change:transform;}.sticky-bottom-bar{box-shadow:0 -2px 15px rgba(0,0,0,.3);will-change:transform;}.responsive-title{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;}.responsive-subtitle{font-size:clamp(1.125rem,3vw,1.5rem);}.responsive-stat{font-size:clamp(1.5rem,4vw,2.5rem);}.picture-frame{border-radius:1.25rem;overflow:hidden;will-change:transform;}.media-shadow{box-shadow:0 20px 45px rgba(15,23,42,.4);}.floating-coin:focus-visible,.glass:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;}@media (prefers-reduced-motion:reduce){.floating-coin{animation:none;}}img[data-responsive-image]{width:100%;height:auto;display:block;object-fit:cover;border-radius:0.75rem;}</style>
+    <style>
+        :root{--color-primary:#0f172a;--color-secondary:#1e3a5f;--color-accent:#00d4ff;font-size:clamp(15px,1.5vw,18px);}
+        html{scroll-behavior:smooth;}
+        *{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;}
+        @keyframes float{0%,100%{transform:translateY(0) translateX(0) rotate(0);opacity:.7}50%{transform:translateY(-20px) translateX(10px) rotate(180deg);opacity:.4}}
+        @keyframes float-delayed-1{0%,100%{transform:translateY(0) translateX(0) rotate(0);opacity:.5}50%{transform:translateY(-30px) translateX(-15px) rotate(180deg);opacity:.3}}
+        @keyframes float-delayed-2{0%,100%{transform:translateY(0) translateX(0) rotate(0);opacity:.6}50%{transform:translateY(-25px) translateX(20px) rotate(180deg);opacity:.35}}
+        @keyframes float-up{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100vh) rotate(360deg);opacity:0}}
+        .floating-coin{animation:float 6s ease-in-out infinite;will-change:transform;}
+        .floating-coin:nth-child(2){animation:float-delayed-1 8s ease-in-out infinite;animation-delay:1s;}
+        .floating-coin:nth-child(3){animation:float-delayed-2 7s ease-in-out infinite;animation-delay:2s;}
+        .floating-coin:nth-child(4){animation:float 6s ease-in-out infinite;animation-delay:.5s;}
+        .floating-coin:nth-child(5){animation:float-delayed-1 8s ease-in-out infinite;animation-delay:1.5s;}
+        .animate-float{animation:float-up linear infinite;}
+        .hero-gradient{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f2847 100%);}
+        .glass{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);will-change:transform;}
+        .sticky-bottom-bar{box-shadow:0 -2px 15px rgba(0,0,0,.3);will-change:transform;}
+        .responsive-title{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.1;}
+        .responsive-subtitle{font-size:clamp(1.125rem,3vw,1.5rem);}
+        .responsive-stat{font-size:clamp(1.5rem,4vw,2.5rem);}
+        .picture-frame{border-radius:1.25rem;overflow:hidden;will-change:transform;}
+        .media-shadow{box-shadow:0 20px 45px rgba(15,23,42,.4);}
+        .floating-coin:focus-visible,.glass:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;}
+        @media (prefers-reduced-motion:reduce){.floating-coin,.animate-float{animation:none;}}
+        img[data-responsive-image]{width:100%;height:auto;display:block;object-fit:cover;border-radius:0.75rem;}
+        [x-cloak]{display:none!important;}
+        .counter-transition{transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1);}
+        .copy-feedback{position:relative;}
+        .copy-feedback::after{content:'Copied!';position:absolute;top:-30px;left:50%;transform:translateX(-50%);background-color:#10b981;color:white;padding:4px 8px;border-radius:4px;font-size:12px;opacity:0;transition:opacity 0.3s ease;pointer-events:none;}
+        .copy-feedback.show::after{opacity:1;}
+        @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+        .pulse-animation{animation:pulse 2s infinite;}
+        .telegram-browser .animate-float,.telegram-browser .fixed{animation:none;position:relative;}
+        .telegram-browser .modal-backdrop{backdrop-filter:none;-webkit-backdrop-filter:none;}
+        @keyframes slideUp{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+        .chat-widget-enter{animation:slideUp 0.3s ease-out;}
+        .modal-backdrop{backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+    </style>
 </head>
 <body class="bg-slate-900 text-white" x-data="app()" x-init="init()">
     <!-- Navigation Bar -->
@@ -50,7 +87,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Live Counters -->
     <section id="hero" class="hero-gradient pt-32 pb-16 px-4 md:px-6 relative overflow-hidden min-h-screen flex flex-col justify-center">
         <!-- Floating coins background layer -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -59,6 +96,16 @@
             <div class="floating-coin absolute bottom-32 left-1/4 text-5xl md:text-6xl opacity-35">₮</div>
             <div class="floating-coin absolute top-1/2 right-1/4 text-3xl md:text-4xl opacity-45">₮</div>
             <div class="floating-coin absolute bottom-20 right-10 text-4xl md:text-5xl opacity-30">₮</div>
+            
+            <!-- Enhanced floating coins from UX branch -->
+            <template x-for="coin in floatingCoins" :key="coin.id">
+                <div 
+                    class="absolute text-cyan-400 text-2xl animate-float pointer-events-none"
+                    :style="`left: ${coin.x}%; animation-duration: ${coin.duration}s; animation-delay: ${coin.delay}s;`"
+                >
+                    ₮
+                </div>
+            </template>
         </div>
 
         <!-- Content -->
@@ -72,11 +119,28 @@
             <p class="responsive-subtitle text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Join our thriving community and start earning rewards through our referral program. Grow your network and watch your earnings multiply.
             </p>
+            
+            <!-- Live Counters -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+                <div class="glass rounded-lg p-6 border border-slate-700">
+                    <div class="text-sm text-gray-400 mb-2">Users Online</div>
+                    <div class="text-3xl font-bold text-green-400 counter-transition" x-text="formatNumber(usersOnline)"></div>
+                </div>
+                <div class="glass rounded-lg p-6 border border-slate-700">
+                    <div class="text-sm text-gray-400 mb-2">Total Deposits Today</div>
+                    <div class="text-3xl font-bold text-cyan-400 counter-transition" x-text="formatNumber(totalDeposits)"></div>
+                </div>
+                <div class="glass rounded-lg p-6 border border-slate-700">
+                    <div class="text-sm text-gray-400 mb-2">Rewards Paid</div>
+                    <div class="text-3xl font-bold text-purple-400 counter-transition" x-text="formatNumber(rewardsPaid)"></div>
+                </div>
+            </div>
+            
             <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-xl font-bold text-lg transition transform hover:scale-105">
+                <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-xl font-bold text-lg transition transform hover:scale-105 pulse-animation">
                     Start Earning Now
                 </a>
-                <button @click="openChat()" class="px-8 py-4 border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-xl font-bold text-lg transition">
+                <button @click="showTelegramModal = true" class="px-8 py-4 border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-xl font-bold text-lg transition">
                     Join Community
                 </button>
             </div>
@@ -121,33 +185,6 @@
                     <div class="text-cyan-400 text-3xl mb-4">🌍</div>
                     <h3 class="text-xl font-bold mb-2">Global Network</h3>
                     <p class="text-gray-400">Connect with traders from 150+ countries</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Deposit Methods Section -->
-    <section id="deposit" class="py-16 px-4 md:px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Multiple Deposit Methods</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-slate-800 rounded-xl p-8 text-center hover:bg-slate-700 transition">
-                    <div class="text-5xl mb-4">💳</div>
-                    <h3 class="text-2xl font-bold mb-3">Credit Card</h3>
-                    <p class="text-gray-400 mb-4">Visa, Mastercard, and more supported</p>
-                    <button @click="openChat()" class="text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
-                </div>
-                <div class="bg-slate-800 rounded-xl p-8 text-center hover:bg-slate-700 transition">
-                    <div class="text-5xl mb-4">₮</div>
-                    <h3 class="text-2xl font-bold mb-3">Direct TON</h3>
-                    <p class="text-gray-400 mb-4">Send TON directly from your wallet</p>
-                    <button @click="openChat()" class="text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
-                </div>
-                <div class="bg-slate-800 rounded-xl p-8 text-center hover:bg-slate-700 transition">
-                    <div class="text-5xl mb-4">🌐</div>
-                    <h3 class="text-2xl font-bold mb-3">Cryptocurrency</h3>
-                    <p class="text-gray-400 mb-4">Bitcoin, Ethereum, and other major coins</p>
-                    <button @click="openChat()" class="text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
                 </div>
             </div>
         </div>
@@ -220,36 +257,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
-                                <td class="px-6 py-4 font-bold text-cyan-400">🥇 1</td>
-                                <td class="px-6 py-4">@LunaWhale</td>
-                                <td class="px-6 py-4">2,847</td>
-                                <td class="px-6 py-4 text-right font-bold text-green-400">$284,700</td>
-                            </tr>
-                            <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
-                                <td class="px-6 py-4 font-bold text-gray-400">🥈 2</td>
-                                <td class="px-6 py-4">@CryptoKing</td>
-                                <td class="px-6 py-4">2,156</td>
-                                <td class="px-6 py-4 text-right font-bold text-green-400">$215,600</td>
-                            </tr>
-                            <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
-                                <td class="px-6 py-4 font-bold text-orange-400">🥉 3</td>
-                                <td class="px-6 py-4">@TONMaster</td>
-                                <td class="px-6 py-4">1,923</td>
-                                <td class="px-6 py-4 text-right font-bold text-green-400">$192,300</td>
-                            </tr>
-                            <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
-                                <td class="px-6 py-4 font-bold">4</td>
-                                <td class="px-6 py-4">@MoonRider</td>
-                                <td class="px-6 py-4">1,745</td>
-                                <td class="px-6 py-4 text-right font-bold text-green-400">$174,500</td>
-                            </tr>
-                            <tr class="hover:bg-slate-700/50 transition">
-                                <td class="px-6 py-4 font-bold">5</td>
-                                <td class="px-6 py-4">@DefiHunter</td>
-                                <td class="px-6 py-4">1,632</td>
-                                <td class="px-6 py-4 text-right font-bold text-green-400">$163,200</td>
-                            </tr>
+                            <template x-for="(user, index) in leaderboard" :key="index">
+                                <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-cyan-500 text-slate-900 font-bold" x-text="index + 1"></span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-8 h-8 bg-slate-600 rounded-full"></div>
+                                            <span x-text="user.name"></span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4" x-text="user.referrals"></td>
+                                    <td class="px-6 py-4 text-right font-bold text-green-400" x-text="'$' + formatNumber(user.earned)"></td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                 </div>
@@ -263,73 +285,33 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- Testimonials Section with Auto-scroll -->
     <section id="testimonials" class="bg-slate-800/50 py-16 px-4 md:px-6">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">What Our Community Says</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass rounded-xl p-6">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                    </div>
-                    <p class="text-gray-300 mb-4">
-                        "TON Keeper changed my life. Started with just 5 referrals and now I'm making passive income every day. Highly recommended!"
-                    </p>
-                    <div class="flex gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center font-bold">
-                            AS
+            <div class="max-w-4xl mx-auto relative overflow-hidden">
+                <div class="flex transition-transform duration-500 ease-in-out" :style="`transform: translateX(-${currentTestimonial * 100}%)`">
+                    <template x-for="(testimonial, index) in testimonials" :key="index">
+                        <div class="w-full flex-shrink-0 px-4">
+                            <div class="glass rounded-xl p-8">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full mr-4 flex items-center justify-center font-bold">
+                                        <span x-text="testimonial.initials"></span>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold" x-text="testimonial.name"></div>
+                                        <div class="text-sm text-gray-400" x-text="testimonial.date"></div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mb-4" x-text="testimonial.text"></p>
+                                <div class="flex">
+                                    <template x-for="i in 5" :key="i">
+                                        <span class="text-yellow-400">⭐</span>
+                                    </template>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p class="font-bold">Alex Singh</p>
-                            <p class="text-xs text-gray-400">Earned $45,000+</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass rounded-xl p-6">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                    </div>
-                    <p class="text-gray-300 mb-4">
-                        "The fastest withdrawals I've ever seen. Community support is incredible. Been here for 3 years now!"
-                    </p>
-                    <div class="flex gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center font-bold">
-                            MJ
-                        </div>
-                        <div>
-                            <p class="font-bold">Maria Jensen</p>
-                            <p class="text-xs text-gray-400">Earned $128,000+</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="glass rounded-xl p-6">
-                    <div class="flex gap-1 mb-4">
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                        <span class="text-yellow-400">⭐</span>
-                    </div>
-                    <p class="text-gray-300 mb-4">
-                        "Professional platform, zero downtime, amazing ROI. This is the real deal for earning passive income."
-                    </p>
-                    <div class="flex gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center font-bold">
-                            RP
-                        </div>
-                        <div>
-                            <p class="font-bold">Raj Patel</p>
-                            <p class="text-xs text-gray-400">Earned $92,500+</p>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -347,7 +329,7 @@
                 <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-xl font-bold text-lg transition transform hover:scale-105">
                     Launch Bot Now
                 </a>
-                <button @click="openChat()" class="px-8 py-4 border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-xl font-bold text-lg transition">
+                <button @click="showTelegramModal = true" class="px-8 py-4 border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-xl font-bold text-lg transition">
                     Chat with Team
                 </button>
             </div>
@@ -409,7 +391,7 @@
                 <span class="text-cyan-400 font-bold ml-2">Join 500K+ members</span>
             </div>
             <div class="flex gap-3">
-                <button @click="openChat()" class="px-4 py-2 border border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-lg transition text-sm">
+                <button @click="showTelegramModal = true" class="px-4 py-2 border border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-lg transition text-sm">
                     Chat
                 </button>
                 <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 rounded-lg font-bold transition text-sm whitespace-nowrap">
@@ -422,10 +404,302 @@
     <!-- Add padding to body to account for sticky bottom bar -->
     <div class="h-20 md:h-16"></div>
 
+    <!-- Telegram Modal -->
+    <div x-show="showTelegramModal" x-cloak class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 modal-backdrop" @click.self="showTelegramModal = false">
+        <div class="bg-slate-800 rounded-lg p-8 max-w-md w-full mx-4 border border-slate-700">
+            <h3 class="text-2xl font-bold mb-4">Start Earning Now!</h3>
+            <p class="text-gray-300 mb-6">Join our Telegram bot to start earning crypto rewards today.</p>
+            <div class="flex space-x-4">
+                <button @click="openTelegramBot" class="flex-1 bg-blue-500 text-white px-4 py-3 rounded-lg font-semibold hover:bg-blue-400 transition">
+                    Open Telegram Bot
+                </button>
+                <button @click="showTelegramModal = false" class="flex-1 bg-slate-700 text-white px-4 py-3 rounded-lg font-semibold hover:bg-slate-600 transition">
+                    Maybe Later
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Chat Widget -->
+    <div class="fixed bottom-4 right-4 z-40">
+        <button @click="toggleChat" class="bg-cyan-500 text-slate-900 w-14 h-14 rounded-full shadow-lg hover:bg-cyan-400 transition-all duration-200 flex items-center justify-center">
+            <span x-show="!showChat" class="text-xl">💬</span>
+            <span x-show="showChat" class="text-xl">✕</span>
+        </button>
+        <div x-show="showChat" x-cloak class="absolute bottom-16 right-0 w-80 bg-slate-800 rounded-lg shadow-xl border border-slate-700 chat-widget-enter">
+            <div class="bg-cyan-500 text-slate-900 px-4 py-3 rounded-t-lg font-bold">
+                Live Support
+            </div>
+            <div class="h-64 overflow-y-auto p-4">
+                <template x-for="message in chatMessages" :key="message.id">
+                    <div class="mb-3" :class="message.sender === 'user' ? 'text-right' : 'text-left'">
+                        <div class="inline-block px-3 py-2 rounded-lg" :class="message.sender === 'user' ? 'bg-cyan-500 text-slate-900' : 'bg-slate-700'">
+                            <span x-text="message.text"></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="p-3 border-t border-slate-700">
+                <div class="flex space-x-2">
+                    <input 
+                        type="text" 
+                        x-model="newMessage"
+                        @keyup.enter="sendMessage"
+                        placeholder="Type your message..."
+                        class="flex-1 bg-slate-700 px-3 py-2 rounded border border-slate-600"
+                    >
+                    <button @click="sendMessage" class="bg-cyan-500 text-slate-900 px-4 py-2 rounded hover:bg-cyan-400 transition">
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Telegram Web Apps Script -->
     <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
 
-    <!-- Alpine.js Application -->
-    <script>function app(){return{openChat(){const t="https://t.me/community";const e=typeof window!=="undefined"&&window.Telegram&&window.Telegram.WebApp;e?e.openLink(t):window.open(t,"_blank");},init(){const e=typeof window!=="undefined"&&window.Telegram&&window.Telegram.WebApp;e&&typeof e.ready==="function"&&e.ready();}}}</script>
+    <!-- Enhanced Alpine.js Application -->
+    <script>
+        function app() {
+            return {
+                // Live counters data
+                usersOnline: 1247,
+                totalDeposits: 48576,
+                rewardsPaid: 38924,
+                
+                // Modal states
+                showTelegramModal: false,
+                showChat: false,
+                
+                // TON and referral data
+                tonAddress: 'EQDk2VP2A_fNqy8t9YpBdJHqL3XzG_5mK7J9Q8rXsYvTnWb',
+                userId: '12345',
+                
+                // Chat data
+                newMessage: '',
+                chatMessages: [
+                    { id: 1, sender: 'support', text: 'Hello! How can I help you today?' },
+                    { id: 2, sender: 'support', text: 'Feel free to ask any questions about earning TON with our platform!' }
+                ],
+                
+                // Floating coins
+                floatingCoins: [],
+                
+                // Testimonials
+                testimonials: [
+                    {
+                        name: 'Alex Singh',
+                        initials: 'AS',
+                        date: '2 days ago',
+                        text: 'TON Keeper changed my life. Started with just 5 referrals and now I\'m making passive income every day. Highly recommended!'
+                    },
+                    {
+                        name: 'Maria Jensen',
+                        initials: 'MJ',
+                        date: '1 week ago',
+                        text: 'The fastest withdrawals I\'ve ever seen. Community support is incredible. Been here for 3 years now!'
+                    },
+                    {
+                        name: 'Raj Patel',
+                        initials: 'RP',
+                        date: '2 weeks ago',
+                        text: 'Professional platform, zero downtime, amazing ROI. This is the real deal for earning passive income.'
+                    }
+                ],
+                currentTestimonial: 0,
+                
+                // Leaderboard data
+                leaderboard: [
+                    { name: '@LunaWhale', referrals: 2847, earned: 284700 },
+                    { name: '@CryptoKing', referrals: 2156, earned: 215600 },
+                    { name: '@TONMaster', referrals: 1923, earned: 192300 },
+                    { name: '@MoonRider', referrals: 1745, earned: 174500 },
+                    { name: '@DefiHunter', referrals: 1632, earned: 163200 }
+                ],
+                
+                // Initialize
+                init() {
+                    this.startCounters();
+                    this.initFloatingCoins();
+                    this.startTestimonialAutoScroll();
+                    this.initTelegramModal();
+                    this.detectTelegramBrowser();
+                },
+                
+                // Live counters with smooth animation
+                startCounters() {
+                    setInterval(() => {
+                        const oldUsersOnline = this.usersOnline;
+                        this.usersOnline += Math.floor(Math.random() * 20) - 10;
+                        this.usersOnline = Math.max(1000, Math.min(2000, this.usersOnline));
+                        
+                        this.totalDeposits += Math.floor(Math.random() * 500);
+                        this.rewardsPaid += Math.floor(Math.random() * 300);
+                    }, 3000);
+                },
+                
+                // Format numbers with commas
+                formatNumber(num) {
+                    return num.toLocaleString();
+                },
+                
+                // Initialize floating coins
+                initFloatingCoins() {
+                    const createCoin = () => {
+                        return {
+                            id: Date.now() + Math.random(),
+                            x: Math.random() * 100,
+                            duration: 10 + Math.random() * 10,
+                            delay: Math.random() * 5
+                        };
+                    };
+                    
+                    // Create initial coins
+                    for (let i = 0; i < 8; i++) {
+                        this.floatingCoins.push(createCoin());
+                    }
+                    
+                    // Add new coins periodically
+                    setInterval(() => {
+                        if (this.floatingCoins.length < 12) {
+                            this.floatingCoins.push(createCoin());
+                        }
+                    }, 3000);
+                    
+                    // Remove old coins
+                    setInterval(() => {
+                        if (this.floatingCoins.length > 8) {
+                            this.floatingCoins.shift();
+                        }
+                    }, 5000);
+                },
+                
+                // Testimonial auto-scroll
+                startTestimonialAutoScroll() {
+                    setInterval(() => {
+                        this.currentTestimonial = (this.currentTestimonial + 1) % this.testimonials.length;
+                    }, 4000);
+                },
+                
+                // Copy to clipboard with feedback
+                copyToClipboard(text) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        const button = event.target;
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        button.classList.add('copy-feedback', 'show');
+                        
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.classList.remove('copy-feedback', 'show');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        
+                        const button = event.target;
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                        }, 2000);
+                    });
+                },
+                
+                // Get referral link
+                get referralLink() {
+                    return `https://tonreferralkeeper.com?start=ref_${this.userId}`;
+                },
+                
+                // Toggle chat widget
+                toggleChat() {
+                    this.showChat = !this.showChat;
+                },
+                
+                // Send chat message
+                sendMessage() {
+                    if (this.newMessage.trim()) {
+                        this.chatMessages.push({
+                            id: Date.now(),
+                            sender: 'user',
+                            text: this.newMessage
+                        });
+                        
+                        const userMessage = this.newMessage;
+                        this.newMessage = '';
+                        
+                        setTimeout(() => {
+                            const responses = [
+                                'Thank you for your message! Our team will get back to you soon.',
+                                'Great question! You can start earning by making a deposit through our Telegram bot.',
+                                'Our platform offers daily rewards with competitive rates. Would you like more details?',
+                                'Withdrawals are processed instantly. You can request them through the Telegram bot.',
+                                'We accept TON deposits. The minimum deposit amount is 10 TON.'
+                            ];
+                            
+                            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                            
+                            this.chatMessages.push({
+                                id: Date.now(),
+                                sender: 'support',
+                                text: randomResponse
+                            });
+                        }, 1000 + Math.random() * 2000);
+                    }
+                },
+                
+                // Open Telegram bot
+                openTelegramBot() {
+                    const telegramUrl = `https://t.me/TONReferralKeeperBot?start=web2025`;
+                    window.open(telegramUrl, '_blank');
+                    this.showTelegramModal = false;
+                },
+                
+                // Initialize Telegram modal with auto-open
+                initTelegramModal() {
+                    setTimeout(() => {
+                        this.showTelegramModal = true;
+                    }, 8000);
+                },
+                
+                // Detect Telegram browser and apply optimizations
+                detectTelegramBrowser() {
+                    const isTelegram = /Telegram/i.test(navigator.userAgent) || 
+                                       window.TelegramWebviewProxy !== undefined;
+                    
+                    if (isTelegram) {
+                        document.body.classList.add('telegram-browser');
+                        
+                        const viewport = document.querySelector('meta[name="viewport"]');
+                        if (viewport) {
+                            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                        }
+                    }
+                },
+                
+                // Open chat function
+                openChat() {
+                    const telegramUrl = 'https://t.me/community';
+                    const telegramApp = typeof window !== "undefined" && window.Telegram && window.Telegram.WebApp;
+                    telegramApp ? telegramApp.openLink(telegramUrl) : window.open(telegramUrl, "_blank");
+                },
+                
+                // Handle keyboard navigation
+                handleKeydown(event) {
+                    if (event.key === 'Escape') {
+                        this.showTelegramModal = false;
+                        this.showChat = false;
+                    }
+                }
+            };
+        }
+    </script>
 </body>
 </html>
