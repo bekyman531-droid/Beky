@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON Referral Keeper - Earn & Grow Together</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        /* Floating coins animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px) rotate(180deg);
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes float-delayed-1 {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-30px) translateX(-15px) rotate(180deg);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes float-delayed-2 {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-25px) translateX(20px) rotate(180deg);
+                opacity: 0.35;
+            }
+        }
+
+        .floating-coin {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-coin:nth-child(2) {
+            animation: float-delayed-1 8s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .floating-coin:nth-child(3) {
+            animation: float-delayed-2 7s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        .floating-coin:nth-child(4) {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        .floating-coin:nth-child(5) {
+            animation: float-delayed-1 8s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+
+        /* Gradient background */
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f2847 100%);
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Tailwind config overrides */
+        :root {
+            --color-primary: #0f172a;
+            --color-secondary: #1e3a5f;
+            --color-accent: #00d4ff;
+        }
+
+        /* Sticky bottom bar shadow */
+        .sticky-bottom-bar {
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white" x-data="app()" @load="init()">
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full bg-slate-900/95 backdrop-blur-md border-b border-slate-800 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg flex items-center justify-center font-bold">
+                    ₮
+                </div>
+                <span class="font-bold text-lg">TON Keeper</span>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm">
+                <a href="#hero" class="hover:text-cyan-400 transition">Home</a>
+                <a href="#stats" class="hover:text-cyan-400 transition">Stats</a>
+                <a href="#referral" class="hover:text-cyan-400 transition">Referral</a>
+                <a href="#testimonials" class="hover:text-cyan-400 transition">Testimonials</a>
+            </div>
+            <button @click="openChat()" class="hidden md:block px-4 py-2 bg-cyan-500 hover:bg-cyan-600 rounded-lg font-semibold transition">
+                Join Community
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-gradient pt-32 pb-16 px-4 md:px-6 relative overflow-hidden min-h-screen flex flex-col justify-center">
+        <!-- Floating coins background layer -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="floating-coin absolute top-20 left-10 text-4xl md:text-5xl opacity-50">₮</div>
+            <div class="floating-coin absolute top-40 right-5 text-3xl md:text-4xl opacity-40">₮</div>
+            <div class="floating-coin absolute bottom-32 left-1/4 text-5xl md:text-6xl opacity-35">₮</div>
+            <div class="floating-coin absolute top-1/2 right-1/4 text-3xl md:text-4xl opacity-45">₮</div>
+            <div class="floating-coin absolute bottom-20 right-10 text-4xl md:text-5xl opacity-30">₮</div>
+        </div>
+
+        <!-- Content -->
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                Earn TON Coins
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+                    While Growing Together
+                </span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Join our thriving community and start earning rewards through our referral program. Grow your network and watch your earnings multiply.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-xl font-bold text-lg transition transform hover:scale-105">
+                    Start Earning Now
+                </a>
+                <button @click="openChat()" class="px-8 py-4 border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-xl font-bold text-lg transition">
+                    Join Community
+                </button>
+            </div>
+            <div class="grid grid-cols-3 gap-4 md:gap-6 pt-12 border-t border-slate-700/50">
+                <div>
+                    <div class="text-2xl md:text-3xl font-bold text-cyan-400">500K+</div>
+                    <p class="text-gray-400 text-sm md:text-base">Active Members</p>
+                </div>
+                <div>
+                    <div class="text-2xl md:text-3xl font-bold text-cyan-400">$2.5M</div>
+                    <p class="text-gray-400 text-sm md:text-base">Distributed</p>
+                </div>
+                <div>
+                    <div class="text-2xl md:text-3xl font-bold text-cyan-400">24/7</div>
+                    <p class="text-gray-400 text-sm md:text-base">Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="stats" class="bg-slate-800/50 py-16 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Why Choose TON Keeper?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass rounded-xl p-6">
+                    <div class="text-cyan-400 text-3xl mb-4">🚀</div>
+                    <h3 class="text-xl font-bold mb-2">Fast Growth</h3>
+                    <p class="text-gray-400">Exponential referral bonuses that accelerate your earnings</p>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="text-cyan-400 text-3xl mb-4">🔒</div>
+                    <h3 class="text-xl font-bold mb-2">Secure</h3>
+                    <p class="text-gray-400">Military-grade encryption protecting your assets</p>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="text-cyan-400 text-3xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-2">Instant Payouts</h3>
+                    <p class="text-gray-400">Withdraw your earnings instantly to your wallet</p>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="text-cyan-400 text-3xl mb-4">🌍</div>
+                    <h3 class="text-xl font-bold mb-2">Global Network</h3>
+                    <p class="text-gray-400">Connect with traders from 150+ countries</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deposit Methods Section -->
+    <section id="deposit" class="py-16 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Multiple Deposit Methods</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-slate-800 rounded-xl p-8 text-center hover:bg-slate-700 transition">
+                    <div class="text-5xl mb-4">💳</div>
+                    <h3 class="text-2xl font-bold mb-3">Credit Card</h3>
+                    <p class="text-gray-400 mb-4">Visa, Mastercard, and more supported</p>
+                    <button @click="openChat()" class="text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-8 text-center hover:bg-slate-700 transition">
+                    <div class="text-5xl mb-4">₮</div>
+                    <h3 class="text-2xl font-bold mb-3">Direct TON</h3>
+                    <p class="text-gray-400 mb-4">Send TON directly from your wallet</p>
+                    <button @click="openChat()" class="text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-8 text-center hover:bg-slate-700 transition">
+                    <div class="text-5xl mb-4">🌐</div>
+                    <h3 class="text-2xl font-bold mb-3">Cryptocurrency</h3>
+                    <p class="text-gray-400 mb-4">Bitcoin, Ethereum, and other major coins</p>
+                    <button @click="openChat()" class="text-cyan-400 hover:text-cyan-300 font-semibold">Learn More →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Referral Program Section -->
+    <section id="referral" class="bg-slate-800/50 py-16 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Powerful Referral System</h2>
+                    <p class="text-gray-400 mb-6 text-lg">
+                        Invite your friends and earn unlimited commission. Our multi-level referral system rewards you for every action your network takes.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="text-cyan-400 text-2xl">✓</div>
+                            <div>
+                                <h4 class="font-bold mb-1">10% First Level</h4>
+                                <p class="text-gray-400">Earn from your direct referrals</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-cyan-400 text-2xl">✓</div>
+                            <div>
+                                <h4 class="font-bold mb-1">5% Second Level</h4>
+                                <p class="text-gray-400">Earn from your referral's referrals</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="text-cyan-400 text-2xl">✓</div>
+                            <div>
+                                <h4 class="font-bold mb-1">2% Third Level</h4>
+                                <p class="text-gray-400">Unlimited network depth earnings</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="inline-block mt-8 px-6 py-3 bg-cyan-500 hover:bg-cyan-600 rounded-lg font-bold transition">
+                        Start Your Chain
+                    </a>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-8">
+                    <img src="https://i.imgur.com/placeholder-referral.png" alt="Referral Structure" class="w-full rounded-lg" onerror="this.style.display='none'">
+                    <div class="bg-slate-700 rounded-lg p-6 mt-6">
+                        <h4 class="font-bold mb-3">Example Earnings</h4>
+                        <p class="text-gray-400 mb-2">10 direct referrals × $100 deposit = $1,000 commission</p>
+                        <p class="text-cyan-400 font-bold">Passive income from your network!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="py-16 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Top Earners Leaderboard</h2>
+            <div class="bg-slate-800 rounded-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-slate-700 border-b border-slate-600">
+                                <th class="px-6 py-4 text-left">Rank</th>
+                                <th class="px-6 py-4 text-left">Username</th>
+                                <th class="px-6 py-4 text-left">Referrals</th>
+                                <th class="px-6 py-4 text-right">Total Earnings</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
+                                <td class="px-6 py-4 font-bold text-cyan-400">🥇 1</td>
+                                <td class="px-6 py-4">@LunaWhale</td>
+                                <td class="px-6 py-4">2,847</td>
+                                <td class="px-6 py-4 text-right font-bold text-green-400">$284,700</td>
+                            </tr>
+                            <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
+                                <td class="px-6 py-4 font-bold text-gray-400">🥈 2</td>
+                                <td class="px-6 py-4">@CryptoKing</td>
+                                <td class="px-6 py-4">2,156</td>
+                                <td class="px-6 py-4 text-right font-bold text-green-400">$215,600</td>
+                            </tr>
+                            <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
+                                <td class="px-6 py-4 font-bold text-orange-400">🥉 3</td>
+                                <td class="px-6 py-4">@TONMaster</td>
+                                <td class="px-6 py-4">1,923</td>
+                                <td class="px-6 py-4 text-right font-bold text-green-400">$192,300</td>
+                            </tr>
+                            <tr class="border-b border-slate-700 hover:bg-slate-700/50 transition">
+                                <td class="px-6 py-4 font-bold">4</td>
+                                <td class="px-6 py-4">@MoonRider</td>
+                                <td class="px-6 py-4">1,745</td>
+                                <td class="px-6 py-4 text-right font-bold text-green-400">$174,500</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/50 transition">
+                                <td class="px-6 py-4 font-bold">5</td>
+                                <td class="px-6 py-4">@DefiHunter</td>
+                                <td class="px-6 py-4">1,632</td>
+                                <td class="px-6 py-4 text-right font-bold text-green-400">$163,200</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p class="text-gray-400 mb-4">See how much you can earn? Rankings update daily.</p>
+                <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold transition">
+                    Join the Leaderboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="bg-slate-800/50 py-16 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">What Our Community Says</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass rounded-xl p-6">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        "TON Keeper changed my life. Started with just 5 referrals and now I'm making passive income every day. Highly recommended!"
+                    </p>
+                    <div class="flex gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center font-bold">
+                            AS
+                        </div>
+                        <div>
+                            <p class="font-bold">Alex Singh</p>
+                            <p class="text-xs text-gray-400">Earned $45,000+</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        "The fastest withdrawals I've ever seen. Community support is incredible. Been here for 3 years now!"
+                    </p>
+                    <div class="flex gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center font-bold">
+                            MJ
+                        </div>
+                        <div>
+                            <p class="font-bold">Maria Jensen</p>
+                            <p class="text-xs text-gray-400">Earned $128,000+</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                        <span class="text-yellow-400">⭐</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        "Professional platform, zero downtime, amazing ROI. This is the real deal for earning passive income."
+                    </p>
+                    <div class="flex gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center font-bold">
+                            RP
+                        </div>
+                        <div>
+                            <p class="font-bold">Raj Patel</p>
+                            <p class="text-xs text-gray-400">Earned $92,500+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="cta" class="py-16 px-4 md:px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-cyan-600/20"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">Ready to Start Earning?</h2>
+            <p class="text-lg md:text-xl text-gray-300 mb-8">
+                Join thousands of successful members and start your journey to financial freedom today. No setup fees, completely free to join.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-xl font-bold text-lg transition transform hover:scale-105">
+                    Launch Bot Now
+                </a>
+                <button @click="openChat()" class="px-8 py-4 border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-xl font-bold text-lg transition">
+                    Chat with Team
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-12 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">About</h3>
+                    <p class="text-gray-400">
+                        TON Keeper is the leading referral platform on the TON blockchain, trusted by 500K+ members worldwide.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#hero" class="hover:text-cyan-400 transition">Home</a></li>
+                        <li><a href="#stats" class="hover:text-cyan-400 transition">Features</a></li>
+                        <li><a href="#referral" class="hover:text-cyan-400 transition">Referral</a></li>
+                        <li><a href="#testimonials" class="hover:text-cyan-400 transition">Community</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Legal</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/privacy" class="hover:text-cyan-400 transition">Privacy Policy</a></li>
+                        <li><a href="/terms" class="hover:text-cyan-400 transition">Terms of Service</a></li>
+                        <li><a href="/support" class="hover:text-cyan-400 transition">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Connect</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p><a href="https://t.me/community" class="hover:text-cyan-400 transition">Telegram Community</a></p>
+                        <p><a href="https://t.me/TONReferralKeeperBot" class="hover:text-cyan-400 transition">Bot</a></p>
+                        <button @click="openChat()" class="hover:text-cyan-400 transition cursor-pointer">Live Chat</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2025 TON Keeper. All rights reserved.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="https://t.me/community" class="text-cyan-400 hover:text-cyan-300 transition">Telegram</a>
+                    <a href="#" class="text-cyan-400 hover:text-cyan-300 transition">Twitter</a>
+                    <a href="#" class="text-cyan-400 hover:text-cyan-300 transition">Discord</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 sticky-bottom-bar z-30">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-sm md:text-base">
+                <span class="text-gray-400">Ready to earn?</span>
+                <span class="text-cyan-400 font-bold ml-2">Join 500K+ members</span>
+            </div>
+            <div class="flex gap-3">
+                <button @click="openChat()" class="px-4 py-2 border border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 rounded-lg transition text-sm">
+                    Chat
+                </button>
+                <a href="https://t.me/TONReferralKeeperBot?start=web2025" class="px-6 py-2 bg-cyan-500 hover:bg-cyan-600 rounded-lg font-bold transition text-sm whitespace-nowrap">
+                    Start Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add padding to body to account for sticky bottom bar -->
+    <div class="h-20 md:h-16"></div>
+
+    <!-- Telegram Web Apps Script -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <!-- Alpine.js Application -->
+    <script>
+        function app() {
+            return {
+                openChat() {
+                    const tgLink = 'https://t.me/community';
+                    
+                    // Try to detect if running in Telegram
+                    if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp) {
+                        // Open in Telegram if available
+                        window.Telegram.WebApp.openLink(tgLink);
+                    } else {
+                        // Fallback to regular link
+                        window.open(tgLink, '_blank');
+                    }
+                },
+                init() {
+                    // Initialize any required data or effects
+                    console.log('TON Keeper Landing Page Loaded');
+                }
+            };
+        }
+    </script>
+</body>
+</html>
