@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beky - Earn Crypto Rewards</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 text-white min-h-screen" x-data="bekyApp">
+    
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+                        <span class="text-gray-900 font-bold">B</span>
+                    </div>
+                    <span class="text-xl font-bold">Beky</span>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#features" class="hover:text-yellow-500 transition">Features</a>
+                    <a href="#leaderboard" class="hover:text-yellow-500 transition">Leaderboard</a>
+                    <a href="#testimonials" class="hover:text-yellow-500 transition">Reviews</a>
+                </nav>
+                <button @click="showTelegramModal = true" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-400 transition">
+                    Start Earning
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Live Counters -->
+    <section class="container mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                Earn Crypto Rewards
+                <span class="text-yellow-500">Daily</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-8">Join thousands of users earning passive income with Beky</p>
+            
+            <!-- Live Counters -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div class="text-sm text-gray-400 mb-2">Users Online</div>
+                    <div class="text-3xl font-bold text-green-400" x-text="formatNumber(usersOnline)"></div>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div class="text-sm text-gray-400 mb-2">Total Deposits Today</div>
+                    <div class="text-3xl font-bold text-yellow-400" x-text="formatNumber(totalDeposits)"></div>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                    <div class="text-sm text-gray-400 mb-2">Rewards Paid</div>
+                    <div class="text-3xl font-bold text-purple-400" x-text="formatNumber(rewardsPaid)"></div>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <button @click="showTelegramModal = true" class="bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transform hover:scale-105 transition-all duration-200 shadow-lg">
+                Start Earning Now
+            </button>
+        </div>
+
+        <!-- Floating Coins Animation -->
+        <div class="fixed inset-0 pointer-events-none overflow-hidden" style="z-index: 1;">
+            <template x-for="coin in floatingCoins" :key="coin.id">
+                <div 
+                    class="absolute text-yellow-500 text-2xl animate-float"
+                    :style="`left: ${coin.x}%; animation-duration: ${coin.duration}s; animation-delay: ${coin.delay}s;`"
+                >
+                    🪙
+                </div>
+            </template>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Why Choose Beky?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">💰</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Daily Rewards</h3>
+                    <p class="text-gray-300">Earn consistent passive income every day</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🔒</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Secure & Safe</h3>
+                    <p class="text-gray-300">Your funds are protected with advanced security</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl">🚀</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Fast Withdrawals</h3>
+                    <p class="text-gray-300">Get your earnings instantly when you need them</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deposit Card Section -->
+    <section class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-center mb-12">Deposit Information</h2>
+        <div class="max-w-md mx-auto bg-gray-800 rounded-lg p-6 border border-gray-700">
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">TON Address</label>
+                <div class="flex items-center space-x-2">
+                    <input 
+                        type="text" 
+                        :value="tonAddress" 
+                        readonly 
+                        class="flex-1 bg-gray-700 px-3 py-2 rounded border border-gray-600"
+                    >
+                    <button @click="copyToClipboard(tonAddress)" class="bg-yellow-500 text-gray-900 px-3 py-2 rounded hover:bg-yellow-400 transition">
+                        Copy
+                    </button>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Referral Link</label>
+                <div class="flex items-center space-x-2">
+                    <input 
+                        type="text" 
+                        :value="referralLink" 
+                        readonly 
+                        class="flex-1 bg-gray-700 px-3 py-2 rounded border border-gray-600"
+                    >
+                    <button @click="copyToClipboard(referralLink)" class="bg-yellow-500 text-gray-900 px-3 py-2 rounded hover:bg-yellow-400 transition">
+                        Copy
+                    </button>
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-2">Referral Text</label>
+                <textarea 
+                    readonly 
+                    class="w-full bg-gray-700 px-3 py-2 rounded border border-gray-600 h-20"
+                >Join me on Beky and start earning crypto rewards daily! Use my referral link to get started.</textarea>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="bg-gray-800 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Top Earners</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-900 rounded-lg overflow-hidden">
+                    <table class="w-full">
+                        <thead class="bg-gray-700">
+                            <tr>
+                                <th class="px-6 py-3 text-left">Rank</th>
+                                <th class="px-6 py-3 text-left">User</th>
+                                <th class="px-6 py-3 text-right">Total Earned</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="(user, index) in leaderboard" :key="index">
+                                <tr class="border-t border-gray-700">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-yellow-500 text-gray-900 font-bold" x-text="index + 1"></span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-8 h-8 bg-gray-600 rounded-full"></div>
+                                            <span x-text="user.name"></span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-right font-bold text-yellow-400" x-text="formatNumber(user.earned)"></td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="container mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-center mb-12">What Users Say</h2>
+        <div class="max-w-4xl mx-auto relative overflow-hidden">
+            <div class="flex transition-transform duration-500 ease-in-out" :style="`transform: translateX(-${currentTestimonial * 100}%)`">
+                <template x-for="(testimonial, index) in testimonials" :key="index">
+                    <div class="w-full flex-shrink-0 px-4">
+                        <div class="bg-gray-800 rounded-lg p-8 border border-gray-700">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gray-600 rounded-full mr-4"></div>
+                                <div>
+                                    <div class="font-bold" x-text="testimonial.name"></div>
+                                    <div class="text-sm text-gray-400" x-text="testimonial.date"></div>
+                                </div>
+                            </div>
+                            <p class="text-gray-300" x-text="testimonial.text"></p>
+                            <div class="flex mt-4">
+                                <template x-for="i in 5" :key="i">
+                                    <span class="text-yellow-500">⭐</span>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Telegram Modal -->
+    <div x-show="showTelegramModal" x-cloak class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" @click.self="showTelegramModal = false">
+        <div class="bg-gray-800 rounded-lg p-8 max-w-md w-full mx-4 border border-gray-700">
+            <h3 class="text-2xl font-bold mb-4">Start Earning Now!</h3>
+            <p class="text-gray-300 mb-6">Join our Telegram bot to start earning crypto rewards today.</p>
+            <div class="flex space-x-4">
+                <button @click="openTelegramBot" class="flex-1 bg-blue-500 text-white px-4 py-3 rounded-lg font-semibold hover:bg-blue-400 transition">
+                    Open Telegram Bot
+                </button>
+                <button @click="showTelegramModal = false" class="flex-1 bg-gray-700 text-white px-4 py-3 rounded-lg font-semibold hover:bg-gray-600 transition">
+                    Maybe Later
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Chat Widget -->
+    <div class="fixed bottom-4 right-4 z-40">
+        <button @click="toggleChat" class="bg-yellow-500 text-gray-900 w-14 h-14 rounded-full shadow-lg hover:bg-yellow-400 transition-all duration-200 flex items-center justify-center">
+            <span x-show="!showChat" class="text-xl">💬</span>
+            <span x-show="showChat" class="text-xl">✕</span>
+        </button>
+        <div x-show="showChat" x-cloak class="absolute bottom-16 right-0 w-80 bg-gray-800 rounded-lg shadow-xl border border-gray-700">
+            <div class="bg-yellow-500 text-gray-900 px-4 py-3 rounded-t-lg font-bold">
+                Live Support
+            </div>
+            <div class="h-64 overflow-y-auto p-4">
+                <template x-for="message in chatMessages" :key="message.id">
+                    <div class="mb-3" :class="message.sender === 'user' ? 'text-right' : 'text-left'">
+                        <div class="inline-block px-3 py-2 rounded-lg" :class="message.sender === 'user' ? 'bg-yellow-500 text-gray-900' : 'bg-gray-700'">
+                            <span x-text="message.text"></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="p-3 border-t border-gray-700">
+                <div class="flex space-x-2">
+                    <input 
+                        type="text" 
+                        x-model="newMessage"
+                        @keyup.enter="sendMessage"
+                        placeholder="Type your message..."
+                        class="flex-1 bg-gray-700 px-3 py-2 rounded border border-gray-600"
+                    >
+                    <button @click="sendMessage" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded hover:bg-yellow-400 transition">
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sticky Bottom Bar -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-gray-800 border-t border-gray-700 z-30">
+        <div class="container mx-auto px-4 py-3">
+            <button @click="showTelegramModal = true" class="w-full bg-yellow-500 text-gray-900 px-4 py-3 rounded-lg font-bold hover:bg-yellow-400 transition">
+                🚀 Start Earning Now
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
